@@ -1,6 +1,6 @@
 # Wplace Overlay Gallery Tweaks
 
-A userscript that tweaks Wplace's new overlay gallery and template tools to give them a simpler user experience without removing the features introduced in the September 2026 update.
+A userscript that tweaks Wplace's new overlay gallery and template tools to give them a simpler user experience without removing the features introduced in the September 2026 1.6.0 update.
 
 ⚠️ **Currently in beta.** This is a work-in-progress done as a proof of concept, so bugs and broken functionality are not only possible but expected. So far I have only worked on the overlay menu/modal, so be on the lookout for updates that expand the number of features.
 
@@ -31,7 +31,7 @@ The script will run automatically whenever you use Wplace.
 
 ## Why?
 
-Wplace's September 2026 update introduced a redesigned overlay gallery and new template management tools. While the new interface adds useful functionality, it also takes more clicks to perform some common actions and displays fewer templates at once. It also has so many controls that it can be overwhelming.
+Wplace's 1.6.0 update introduced a redesigned overlay gallery and new template management tools. While the update adds useful functionality, it also takes more clicks to perform some common actions and displays fewer templates at once. It also has so many controls that it can be overwhelming.
 
 This script keeps the new functionality while making the gallery more compact and putting commonly used template actions closer at hand.
 
