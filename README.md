@@ -16,9 +16,15 @@ A userscript that tweaks Wplace's new overlay gallery and template tools to give
   * Delete
 * **Template information tweaks**, including:
   * Layout adjusted slightly and now shows total pixel count
+* **Streamlined painting toolbar**:
+  * Uses a compact mobile header with Back, Tools, color filter, and screen-lock controls
+  * Stacks the compact Expand, color-filter, and screen-lock controls in the same right-hand column when collapsed
+  * Gives desktop a matching Back, More Tools, opacity, and color-filter toolbar
+  * Removes the duplicate progress refresh button
+  * Shows Wplace's optional progress summary as a separate panel instead of widening the toolbar
 * Your selected preferences are remembered between visits.
 
-More coming soon! The toolbar will be next.
+More coming soon!
 
 ## Install
 
