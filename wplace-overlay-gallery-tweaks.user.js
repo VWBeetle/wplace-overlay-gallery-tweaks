@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Wplace Overlay Gallery Tweaks
 // @namespace    https://github.com/VWBeetle/wplace-overlay-gallery-tweaks
-// @version      0.1.0
+// @version      1.0.0
 // @description  Experimental user script to improve the Wplace overlay gallery UX, making it more similar to older versions without removing new features
 // @downloadURL  https://raw.githubusercontent.com/vwbeetle/wplace-overlay-gallery-tweaks/main/wplace-overlay-gallery-tweaks.user.js
 // @updateURL    https://raw.githubusercontent.com/vwbeetle/wplace-overlay-gallery-tweaks/main/wplace-overlay-gallery-tweaks.user.js
@@ -60,6 +60,338 @@
     .wptt-layout-control span { display:block; padding:6px 12px; border-radius:5px; }
     .wptt-layout-control input:checked + span { background:#6853ef; color:white; }
     .wptt-layout-control input:focus-visible + span { outline:2px solid #9584ff; outline-offset:2px; }
+    /* Keep progress available without making the compact toolbar wider. */
+    .overlay-build-hud > .overlay-build-strip > .overlay-build-divider,
+    .overlay-build-hud .overlay-build-mobile-head > .overlay-build-refresh-button,
+    .overlay-build-hud .overlay-build-mobile-collapsed-progress {
+      display:none!important;
+    }
+    .overlay-build-hud > .overlay-build-strip > .overlay-build-progress {
+      display:grid!important;
+      grid-template-columns:28px minmax(0, 1fr) 24px!important;
+      align-items:center!important;
+      gap:8px!important;
+      position:absolute!important;
+      box-sizing:border-box!important;
+      width:min(270px, calc(100vw - 32px))!important;
+      height:38px!important;
+      min-height:38px!important;
+      max-height:38px!important;
+      padding:0 9px!important;
+      border-radius:10px!important;
+      background:var(--wptt-toolbar-surface, var(--color-base-200, #293140))!important;
+      box-shadow:0 4px 14px rgba(0, 0, 0, .25)!important;
+      pointer-events:auto!important;
+      z-index:4!important;
+    }
+    .overlay-build-hud > .overlay-build-strip > .overlay-build-progress > .overlay-build-progress-copy,
+    .overlay-build-hud > .overlay-build-strip > .overlay-build-progress > .overlay-build-progress-refresh {
+      display:contents!important;
+    }
+    .overlay-build-hud > .overlay-build-strip > .overlay-build-progress > .overlay-build-progress-copy > :first-child,
+    .overlay-build-hud > .overlay-build-strip > .overlay-build-progress > .overlay-build-progress-refresh > :first-child {
+      display:none!important;
+    }
+    .overlay-build-hud > .overlay-build-strip > .overlay-build-progress > .overlay-build-progress-copy > :last-child {
+      grid-column:1!important;
+      display:grid!important;
+      place-items:center!important;
+      align-self:center!important;
+      padding:0!important;
+      margin:0!important;
+      font-size:var(--wptt-toolbar-label-size, 12px)!important;
+      line-height:1!important;
+      text-align:center!important;
+      color:color-mix(in oklab, var(--color-base-content, #f1f3f7) 72%, transparent)!important;
+    }
+    .overlay-build-hud > .overlay-build-strip > .overlay-build-progress > .overlay-build-progress-track {
+      grid-column:2!important;
+      align-self:center!important;
+      width:100%!important;
+      min-width:0!important;
+      margin:0!important;
+      transform:none!important;
+    }
+    .overlay-build-hud > .overlay-build-strip > .overlay-build-progress > .overlay-build-progress-refresh > button {
+      grid-column:3!important;
+      display:grid!important;
+      place-items:center!important;
+      position:static!important;
+      box-sizing:border-box!important;
+      width:24px!important;
+      height:24px!important;
+      min-width:24px!important;
+      padding:0!important;
+      margin:0!important;
+      pointer-events:auto!important;
+    }
+    /* Fit Wplace's native mobile controls into one compact header. */
+    .overlay-build-hud .overlay-build-mobile-head > .overlay-build-back,
+    .overlay-build-hud .overlay-build-mobile-head > .overlay-build-mobile-lock {
+      display:flex!important;
+      position:static!important;
+      flex:0 0 30px!important;
+      width:30px!important;
+      height:30px!important;
+      min-width:30px!important;
+      border-radius:50%!important;
+    }
+    .overlay-build-hud .overlay-build-mobile-head > button {
+      box-sizing:border-box!important;
+      height:30px!important;
+      min-height:30px!important;
+      max-height:30px!important;
+      border:0!important;
+      box-shadow:none!important;
+    }
+    .overlay-build-hud .overlay-build-mobile-head > .overlay-build-tools-button {
+      padding-top:0!important;
+      padding-bottom:0!important;
+    }
+    .overlay-build-hud:not(.mobile-collapsed) .overlay-build-mobile-head > button:not([aria-pressed="true"]):not([aria-checked="true"]):not([aria-expanded="true"]):not(.active) {
+      background:transparent!important;
+    }
+    .overlay-build-hud .overlay-build-mobile-head > .overlay-build-mobile-palette,
+    .overlay-build-hud .overlay-build-mobile-head > .overlay-build-mobile-collapse {
+      border-radius:50%!important;
+    }
+    .overlay-build-hud .overlay-build-mobile-head > .overlay-build-back {
+      color:color-mix(in oklab, var(--color-base-content, #f1f3f7) 72%, transparent)!important;
+    }
+    .overlay-build-hud .overlay-build-mobile-head > .overlay-build-tools-button[aria-expanded="false"] {
+      color:color-mix(in oklab, var(--color-base-content, #f1f3f7) 72%, transparent)!important;
+    }
+    .overlay-build-hud .overlay-build-mobile-head > .overlay-build-mobile-palette,
+    .overlay-build-hud .overlay-build-mobile-head > .overlay-build-mobile-lock {
+      transition:none!important;
+    }
+    .overlay-build-hud .overlay-build-mobile-head > button svg {
+      width:16px!important;
+      height:16px!important;
+    }
+    .overlay-build-hud .overlay-build-mobile-head > .wptt-mobile-divider {
+      align-self:center;
+      flex:0 0 1px;
+      width:1px;
+      height:18px;
+      background:currentColor;
+      opacity:.18;
+      pointer-events:none;
+    }
+    .overlay-build-hud:not(.mobile-collapsed) > .overlay-build-mobile-lock,
+    .overlay-build-hud.mobile-collapsed .overlay-build-mobile-head > .overlay-build-back {
+      display:none!important;
+    }
+    .overlay-build-hud.mobile-collapsed .wptt-mobile-divider {
+      display:none!important;
+    }
+    /* Give desktop the same compact control treatment and ordering. */
+    .overlay-build-strip[data-wptt-desktop-toolbar] {
+      align-items:center!important;
+      gap:9px!important;
+      padding:7px 10px!important;
+      overflow:visible!important;
+    }
+    .overlay-build-strip[data-wptt-desktop-toolbar] > .overlay-build-back {
+      display:flex!important;
+      position:static!important;
+      box-sizing:border-box!important;
+      flex:0 0 30px!important;
+      width:30px!important;
+      height:30px!important;
+      min-width:30px!important;
+      padding:0!important;
+      border:0!important;
+      border-radius:50%!important;
+      background:transparent!important;
+      color:color-mix(in oklab, var(--color-base-content, #f1f3f7) 72%, transparent)!important;
+      box-shadow:none!important;
+    }
+    .overlay-build-strip[data-wptt-desktop-toolbar] > .overlay-build-back svg,
+    .overlay-build-strip[data-wptt-desktop-toolbar] > .overlay-build-desktop-palette svg,
+    .overlay-build-strip[data-wptt-desktop-toolbar] > .overlay-build-more svg {
+      width:16px!important;
+      height:16px!important;
+    }
+    .overlay-build-strip[data-wptt-desktop-toolbar] > .overlay-build-more,
+    .overlay-build-strip[data-wptt-desktop-toolbar] > .overlay-build-desktop-palette {
+      box-sizing:border-box!important;
+      height:30px!important;
+      min-height:30px!important;
+      max-height:30px!important;
+      border:0!important;
+      box-shadow:none!important;
+    }
+    .overlay-build-strip[data-wptt-desktop-toolbar] > .overlay-build-desktop-palette {
+      flex:0 0 30px!important;
+      width:30px!important;
+      min-width:30px!important;
+      max-width:30px!important;
+      min-height:30px!important;
+      max-height:30px!important;
+      aspect-ratio:1 / 1!important;
+      padding:0!important;
+      border-radius:50%!important;
+      overflow:hidden!important;
+    }
+    .overlay-build-strip[data-wptt-desktop-toolbar] > .overlay-build-more[aria-expanded="false"],
+    .overlay-build-strip[data-wptt-desktop-toolbar] > .overlay-build-desktop-palette[aria-pressed="false"] {
+      background:transparent!important;
+      color:color-mix(in oklab, var(--color-base-content, #f1f3f7) 72%, transparent)!important;
+    }
+    .overlay-build-strip[data-wptt-desktop-toolbar] > .wptt-desktop-divider {
+      align-self:center;
+      flex:0 0 1px;
+      width:1px;
+      height:18px;
+      background:currentColor;
+      opacity:.18;
+      pointer-events:none;
+    }
+    .overlay-build-hud[data-wptt-desktop-toolbar] > .overlay-build-tools-popover {
+      top:var(--wptt-desktop-popover-top)!important;
+      right:var(--wptt-desktop-popover-right)!important;
+      left:auto!important;
+      transform:none!important;
+      z-index:5!important;
+    }
+    .overlay-build-strip[data-wptt-desktop-toolbar] > .overlay-build-progress {
+      top:calc(100% + 6px)!important;
+      right:0!important;
+      left:auto!important;
+      transform:none!important;
+    }
+    @media(max-width:900px), (pointer:coarse) {
+      /* On mobile this strip only contains the progress summary after Wplace
+         moves the palette and Tools controls into the header. */
+      .overlay-build-hud > .overlay-build-strip {
+        display:block!important;
+        position:absolute!important;
+        top:0!important;
+        right:0!important;
+        left:auto!important;
+        width:0!important;
+        min-width:0!important;
+        height:0!important;
+        min-height:0!important;
+        padding:0!important;
+        border:0!important;
+        background:transparent!important;
+        box-shadow:none!important;
+        transform:none!important;
+        overflow:visible!important;
+        pointer-events:none!important;
+        z-index:1!important;
+      }
+      .overlay-build-hud .overlay-build-mobile-identity {
+        display:none!important;
+      }
+      .overlay-build-hud:not(.mobile-collapsed) > .overlay-build-mobile-head {
+        right:0!important;
+        left:auto!important;
+        width:max-content!important;
+        max-width:100%!important;
+      }
+      .overlay-build-hud .overlay-build-tools-popover {
+        top:52px!important;
+        right:0!important;
+        left:auto!important;
+        transform:none!important;
+        z-index:10!important;
+      }
+      .overlay-build-hud > .overlay-build-strip > .overlay-build-progress {
+        top:52px!important;
+        right:0!important;
+        left:auto!important;
+        transform:none!important;
+      }
+      .overlay-build-hud > .overlay-build-strip > .overlay-build-progress > .overlay-build-progress-refresh > button,
+      .overlay-build-hud > .overlay-build-strip > .overlay-build-progress > .overlay-build-progress-refresh > button:hover,
+      .overlay-build-hud > .overlay-build-strip > .overlay-build-progress > .overlay-build-progress-refresh > button:focus,
+      .overlay-build-hud > .overlay-build-strip > .overlay-build-progress > .overlay-build-progress-refresh > button:focus-visible,
+      .overlay-build-hud > .overlay-build-strip > .overlay-build-progress > .overlay-build-progress-refresh > button:active {
+        border-radius:50%!important;
+        background:transparent!important;
+        color:color-mix(in oklab, var(--color-base-content, #f1f3f7) 72%, transparent)!important;
+        box-shadow:none!important;
+        filter:none!important;
+        transition:none!important;
+        -webkit-tap-highlight-color:transparent!important;
+      }
+      .overlay-build-hud.mobile-collapsed > .overlay-build-strip > .overlay-build-progress {
+        display:none!important;
+      }
+      /* Keep collapsed controls in the toolbar's rightmost column. */
+      .overlay-build-hud.mobile-collapsed > .overlay-build-mobile-collapsed {
+        top:7px!important;
+        right:10px!important;
+        left:auto!important;
+        width:30px!important;
+        height:30px!important;
+        padding:0!important;
+        border:0!important;
+        border-radius:50%!important;
+        background:var(--color-base-200, #293140)!important;
+        color:color-mix(in oklab, var(--color-base-content, #f1f3f7) 72%, transparent)!important;
+        box-shadow:0 2px 8px rgba(0, 0, 0, .28)!important;
+        transition:none!important;
+      }
+      .overlay-build-hud.mobile-collapsed > .overlay-build-mobile-collapsed svg {
+        width:16px!important;
+        height:16px!important;
+      }
+      .overlay-build-hud.mobile-collapsed > .overlay-build-mobile-head {
+        top:0!important;
+        right:10px!important;
+        left:auto!important;
+        width:30px!important;
+        /* Match the rounded center of Wplace's 45.6px expanded header. */
+        height:46px!important;
+        padding:0!important;
+        border:0!important;
+        border-radius:50%!important;
+        background:transparent!important;
+        box-shadow:none!important;
+        overflow:visible!important;
+      }
+      .overlay-build-hud.mobile-collapsed .overlay-build-mobile-palette {
+        position:absolute!important;
+        top:45px!important;
+        right:0!important;
+        left:auto!important;
+        width:30px!important;
+        height:30px!important;
+        min-width:30px!important;
+        flex-basis:30px!important;
+        border-radius:50%!important;
+        box-shadow:0 2px 8px rgba(0, 0, 0, .28)!important;
+      }
+      .overlay-build-hud.mobile-collapsed .overlay-build-mobile-palette,
+      .overlay-build-hud.mobile-collapsed .overlay-build-mobile-head > .overlay-build-mobile-lock {
+        background:var(--color-base-200, #293140)!important;
+      }
+      .overlay-build-hud.mobile-collapsed .overlay-build-mobile-palette[aria-pressed="true"],
+      .overlay-build-hud.mobile-collapsed .overlay-build-mobile-head > .overlay-build-mobile-lock[aria-pressed="true"] {
+        background:color-mix(in oklab, var(--color-primary, #6853ef) 28%, var(--color-base-200, #293140))!important;
+      }
+      .overlay-build-hud.mobile-collapsed .overlay-build-mobile-head > .overlay-build-mobile-lock {
+        display:flex!important;
+        position:absolute!important;
+        top:83px!important;
+        right:0!important;
+        left:auto!important;
+        width:30px!important;
+        height:30px!important;
+        min-width:30px!important;
+        border:0!important;
+        border-radius:50%!important;
+        box-shadow:0 2px 8px rgba(0, 0, 0, .28)!important;
+      }
+      .overlay-build-hud.mobile-collapsed .overlay-build-mobile-head > .overlay-build-mobile-lock svg {
+        width:16px!important;
+        height:16px!important;
+      }
+    }
     @media(max-width:540px) {
       [data-wptt-compact] > [data-overlay-gallery-item] { flex-wrap:nowrap; gap:4px; }
       [data-wptt-compact] .overlay-gallery-preview { width:60px!important; height:60px!important; flex-basis:60px; }
@@ -69,12 +401,28 @@
 
   const visible = element => element.getClientRects().length > 0;
   const nativeClicks = new WeakSet();
+  const EXPAND_ICON_PATH = "m356-564-56-56 180-180 180 180-56 56-124-124-124 124Zm124 404L300-340l56-56 124 124 124-124 56 56-180 180Z";
   function openDetails(button) {
     nativeClicks.add(button);
     try { button.click(); } finally { nativeClicks.delete(button); }
   }
   const namedButton = (root, name) => [...root.querySelectorAll("button")]
     .find(button => button.textContent.trim() === name && visible(button));
+
+  const desktopToolbarObservers = new WeakMap();
+  function positionDesktopPopover(toolbar, strip) {
+    if (!toolbar.hasAttribute("data-wptt-desktop-toolbar")) return;
+    const toolbarRect = toolbar.getBoundingClientRect();
+    const stripRect = strip.getBoundingClientRect();
+    toolbar.style.setProperty(
+      "--wptt-desktop-popover-right",
+      `${Math.max(0, toolbarRect.right - stripRect.right)}px`,
+    );
+    toolbar.style.setProperty(
+      "--wptt-desktop-popover-top",
+      `${stripRect.bottom - toolbarRect.top + 6}px`,
+    );
+  }
 
   // Follow native navigation rather than accessing Wplace's private app state.
   // Only the panel opened by this action may supply the destination button.
@@ -104,8 +452,142 @@
     check();
   }
 
+  function refreshPaintUi() {
+    for (const toolbar of document.querySelectorAll(".overlay-build-hud")) {
+      const mobileHead = toolbar.querySelector(".overlay-build-mobile-head");
+      const back = toolbar.querySelector(".overlay-build-back");
+      const lock = toolbar.querySelector(".overlay-build-mobile-lock");
+      const expand = toolbar.querySelector(":scope > .overlay-build-mobile-collapsed");
+      const strip = toolbar.querySelector(".overlay-build-strip");
+      const popover = toolbar.querySelector(".overlay-build-tools-popover");
+
+      if (!back || !strip) continue;
+
+      const expandPath = expand?.querySelector("svg path");
+      if (expandPath?.getAttribute("d") !== EXPAND_ICON_PATH) {
+        expandPath?.setAttribute("d", EXPAND_ICON_PATH);
+      }
+
+      const isMobileToolbar = matchMedia(
+        "(max-width: 900px), (pointer: coarse)",
+      ).matches;
+      const surfaceSource = isMobileToolbar && mobileHead
+        && !toolbar.classList.contains("mobile-collapsed")
+        ? mobileHead
+        : strip;
+      let toolbarSurface = getComputedStyle(surfaceSource).backgroundColor;
+      if (toolbarSurface === "rgba(0, 0, 0, 0)" && surfaceSource !== strip) {
+        toolbarSurface = getComputedStyle(strip).backgroundColor;
+      }
+      if (toolbarSurface && toolbarSurface !== "rgba(0, 0, 0, 0)") {
+        toolbar.style.setProperty("--wptt-toolbar-surface", toolbarSurface);
+      }
+      if (isMobileToolbar && mobileHead && back && lock) {
+        delete strip.dataset.wpttDesktopToolbar;
+        delete toolbar.dataset.wpttDesktopToolbar;
+        toolbar.style.removeProperty("--wptt-desktop-popover-right");
+        toolbar.style.removeProperty("--wptt-desktop-popover-top");
+        if (popover && popover.parentElement !== toolbar) {
+          toolbar.insertBefore(popover, strip);
+        }
+        if (back.parentElement !== mobileHead) mobileHead.prepend(back);
+        let divider = mobileHead.querySelector(".wptt-mobile-divider");
+        if (!divider) {
+          divider = document.createElement("span");
+          divider.className = "wptt-mobile-divider";
+          divider.setAttribute("role", "separator");
+          divider.setAttribute("aria-orientation", "vertical");
+          back.after(divider);
+        }
+        const tools = mobileHead.querySelector(".overlay-build-tools-button");
+        if (tools) {
+          toolbar.style.setProperty(
+            "--wptt-toolbar-label-size",
+            getComputedStyle(tools).fontSize,
+          );
+        }
+        const colorFilter = mobileHead.querySelector(
+          ".overlay-build-mobile-palette",
+        );
+        const collapse = mobileHead.querySelector(
+          ".overlay-build-mobile-collapse",
+        );
+        if (lock.parentElement !== mobileHead) {
+          mobileHead.append(lock);
+        }
+
+        const desiredOrder = [
+          back,
+          divider,
+          tools,
+          colorFilter,
+          lock,
+          collapse,
+        ].filter(Boolean);
+        const currentOrder = [...mobileHead.children].filter(element =>
+          desiredOrder.includes(element),
+        );
+        if (desiredOrder.some((element, index) => currentOrder[index] !== element)) {
+          mobileHead.append(...desiredOrder);
+        }
+      } else if (!isMobileToolbar) {
+        strip.dataset.wpttDesktopToolbar = "";
+        toolbar.dataset.wpttDesktopToolbar = "";
+        if (back.parentElement !== strip) strip.prepend(back);
+
+        let divider = strip.querySelector(":scope > .wptt-desktop-divider");
+        if (!divider) {
+          divider = document.createElement("span");
+          divider.className = "wptt-desktop-divider";
+          divider.setAttribute("role", "separator");
+          divider.setAttribute("aria-orientation", "vertical");
+          back.after(divider);
+        }
+
+        const moreTools = strip.querySelector(":scope > .overlay-build-more");
+        if (moreTools) {
+          toolbar.style.setProperty(
+            "--wptt-toolbar-label-size",
+            getComputedStyle(moreTools).fontSize,
+          );
+        }
+        const opacity = strip.querySelector(":scope > .overlay-build-opacity");
+        const colorFilter = strip.querySelector(
+          ":scope > .overlay-build-desktop-palette",
+        );
+        if (popover && popover.parentElement !== toolbar) {
+          toolbar.insertBefore(popover, strip);
+        }
+
+        const desiredOrder = [
+          back,
+          divider,
+          moreTools,
+          opacity,
+          colorFilter,
+        ].filter(Boolean);
+        const currentOrder = [...strip.children].filter(element =>
+          desiredOrder.includes(element),
+        );
+        if (desiredOrder.some((element, index) => currentOrder[index] !== element)) {
+          strip.append(...desiredOrder);
+        }
+        positionDesktopPopover(toolbar, strip);
+        if (!desktopToolbarObservers.has(strip)) {
+          const resizeObserver = new ResizeObserver(() => {
+            positionDesktopPopover(toolbar, strip);
+          });
+          resizeObserver.observe(toolbar);
+          resizeObserver.observe(strip);
+          desktopToolbarObservers.set(strip, resizeObserver);
+        }
+      }
+    }
+  }
+
   let layoutControlId = 0;
   function refresh() {
+    refreshPaintUi();
     for (const gallery of document.querySelectorAll(".overlay-gallery-grid[role='list']")) {
       if (compact) gallery.dataset.wpttCompact = "";
       else delete gallery.dataset.wpttCompact;
@@ -259,7 +741,11 @@
     if (scheduled) return;
     scheduled = true;
     requestAnimationFrame(() => { scheduled = false; refresh(); });
-  }).observe(document.body, {childList:true, subtree:true, characterData:true});
+  }).observe(document.body, {
+    childList:true,
+    subtree:true,
+    characterData:true,
+  });
   refresh();
 })();
 
