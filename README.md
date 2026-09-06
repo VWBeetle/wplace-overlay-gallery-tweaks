@@ -2,7 +2,7 @@
 
 A userscript that tweaks Wplace's new overlay gallery and template tools to give them a simpler user experience without removing the features introduced in the September 2026 1.6.0 update.
 
-⚠️ **Currently in beta.** This is a work-in-progress done as a proof of concept, so bugs and broken functionality are not only possible but expected. So far I have only worked on the overlay menu/modal, so be on the lookout for updates that expand the number of features.
+⚠️ **Currently in beta.** This is a work-in-progress done as a proof of concept, so bugs and broken functionality are not only possible but expected.
 
 ## Features
 * **Click anywhere on a template row to start painting**, rather than opening the details screen first, just like the old UI.
